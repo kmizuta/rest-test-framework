@@ -99,8 +99,7 @@ public class SampleTestCase {
 
     @TestFactory
     public Iterable<DynamicTest> test() throws IOException {
-        var tests = DynamicTestFactory.getTestCases(factory,"testCase1.json", "testCase2.json");
-        return tests;
+        return DynamicTestFactory.getTestCases(factory,"testCase1.json", "testCase2.json");
     }
 }
 ```
