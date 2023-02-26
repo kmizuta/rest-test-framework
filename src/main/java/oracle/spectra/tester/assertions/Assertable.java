@@ -1,4 +1,4 @@
-package oracle.spectra.tester.runner.assertions;
+package oracle.spectra.tester.assertions;
 
 import io.restassured.response.Response;
 import oracle.spectra.tester.model.TestAsserter;

@@ -1,4 +1,4 @@
-package oracle.spectra.tester.runner;
+package oracle.spectra.tester;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -11,7 +11,8 @@ import io.restassured.specification.RequestSpecification;
 import oracle.spectra.tester.model.TestCase;
 import oracle.spectra.tester.model.TestRequest;
 import oracle.spectra.tester.model.TestResponse;
-import oracle.spectra.tester.runner.assertions.Asserters;
+import oracle.spectra.tester.assertions.Asserters;
+import oracle.spectra.tester.assertions.AssertionHandler;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.slf4j.Logger;
@@ -27,10 +28,10 @@ public class TestRunner {
     private final ParameterSupport parameterSupport;
     private final Asserters asserters;
 
-    TestRunner(String baseUrl) {
+    TestRunner(String baseUrl, AssertionHandler assertionHandler) {
         this.baseUrl = baseUrl;
         this.parameterSupport = new ParameterSupport();
-        this.asserters = Asserters.getInstance(parameterSupport);
+        this.asserters = Asserters.getInstance(parameterSupport, assertionHandler);
     }
 
     public void runTest(TestCase testCase) {
@@ -55,7 +56,7 @@ public class TestRunner {
             throw new RuntimeException("Invalid HTTP method");
         }
 
-        assertResponse(testCase.getResponse(), response);
+        handleResponse(testCase.getResponse(), response);
     }
 
     private URL getUrl(TestRequest request) {
@@ -71,12 +72,17 @@ public class TestRunner {
     }
 
 
-    private Response assertResponse(TestResponse expectedResponse, Response response) {
+    private Response handleResponse(TestResponse expectedResponse, Response response) {
         logger.debug(response.asPrettyString());
 
         var assertions = expectedResponse.getAssertions();
+        AssertionError assertionError = null;
         if (assertions != null) {
-            assertions.forEach( asserter -> asserters.doAssert(asserter, response) );
+            try {
+                assertions.forEach(asserter -> asserters.doAssert(asserter, response));
+            } catch(AssertionError t) {
+                assertionError = t;
+            }
         }
 
         var set = expectedResponse.getSet();
@@ -87,6 +93,9 @@ public class TestRunner {
                 parameterSupport.put(propName, propValue);
             });
         }
+
+        if (assertionError != null)
+            throw assertionError;
 
         return response;
     }
@@ -144,7 +153,7 @@ public class TestRunner {
         var mapper = new ObjectMapper();
         try {
             var bodyJson = mapper.writeValueAsString(bodyNode);
-            System.out.println(bodyJson);
+            logger.debug(bodyJson);
             given.body(bodyJson);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);

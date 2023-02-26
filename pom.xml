@@ -13,50 +13,63 @@
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <version.lib.rest-assured>5.3.0</version.lib.rest-assured>
+        <version.lib.jackson>2.13.4.2</version.lib.jackson>
+        <version.lib.jsonassert>1.5.0</version.lib.jsonassert>
+        <version.lib.lombok>1.18.26</version.lib.lombok>
+        <version.lib.slf4j>2.0.6</version.lib.slf4j>
+        <version.lib.junit-jupiter>5.9.2</version.lib.junit-jupiter>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>5.3.0</version>
+            <version>${version.lib.rest-assured}</version>
         </dependency>
 
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-path</artifactId>
-            <version>5.3.0</version>
+            <version>${version.lib.rest-assured}</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.13.4.2</version>
+            <version>${version.lib.jackson}</version>
         </dependency>
 
         <dependency>
             <groupId>org.skyscreamer</groupId>
             <artifactId>jsonassert</artifactId>
-            <version>1.5.0</version>
+            <version>${version.lib.jsonassert}</version>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.26</version>
+            <version>${version.lib.lombok}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${version.lib.junit-jupiter}</version>
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.6</version>
+            <version>${version.lib.slf4j}</version>
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.6</version>
+            <version>${version.lib.slf4j}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

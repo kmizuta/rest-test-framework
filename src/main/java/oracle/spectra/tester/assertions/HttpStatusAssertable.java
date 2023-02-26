@@ -1,4 +1,4 @@
-package oracle.spectra.tester.runner.assertions;
+package oracle.spectra.tester.assertions;
 
 import com.fasterxml.jackson.databind.node.JsonNodeType;
 import io.restassured.response.Response;

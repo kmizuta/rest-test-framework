@@ -1,4 +1,4 @@
-package oracle.spectra.tester.runner;
+package oracle.spectra.tester;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -21,10 +21,10 @@ public class JsonUtil {
         return childNode == null ? null : childNode.asText();
     }
 
-    public static String nodeAsString(JsonNode node) {
-        if (node == null) return null;
+    public static String objectAsJsonString(Object obj) {
+        if (obj == null) return null;
         try {
-            return objectMapper.writeValueAsString(node);
+            return objectMapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

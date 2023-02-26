@@ -1,8 +1,8 @@
-package oracle.spectra.tester.runner.assertions;
+package oracle.spectra.tester.assertions;
 
 import io.restassured.response.Response;
 import oracle.spectra.tester.model.TestAsserter;
-import oracle.spectra.tester.runner.JsonUtil;
+import oracle.spectra.tester.JsonUtil;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -14,7 +14,7 @@ public class LenientMatchAssertable implements Assertable {
 
     @Override
     public void doAssert(Asserters asserters, TestAsserter asserter, Response response) {
-        var expected = JsonUtil.nodeAsString(asserter.getArg());
+        var expected = JsonUtil.objectAsJsonString(asserter.getArg());
         var actual = response.getBody().asString();
         logger.debug(actual);
 

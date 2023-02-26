@@ -1,7 +1,7 @@
-package oracle.spectra.tester.runner.assertions;
+package oracle.spectra.tester.assertions;
 
 import io.restassured.response.Response;
-import oracle.spectra.tester.runner.ParameterSupport;
+import oracle.spectra.tester.ParameterSupport;
 import oracle.spectra.tester.model.TestAsserter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,19 +12,21 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Asserters {
     private static final Logger logger = LoggerFactory.getLogger(Asserters.class);
-    private static final String HTTP_STATUS_ASSERTABLE_CLASS = "oracle.spectra.tester.runner.assertions.HttpStatusAssertable";
-    private static final String IS_ASSERTABLE_CLASS = "oracle.spectra.tester.runner.assertions.IsAssertable";
-    private static final String LENIENT_MATCH_ASSERTABLE_CLASS = "oracle.spectra.tester.runner.assertions.LenientMatchAssertable";
+    private static final String HTTP_STATUS_ASSERTABLE_CLASS = "oracle.spectra.tester.assertions.HttpStatusAssertable";
+    private static final String IS_ASSERTABLE_CLASS = "oracle.spectra.tester.assertions.IsAssertable";
+    private static final String LENIENT_MATCH_ASSERTABLE_CLASS = "oracle.spectra.tester.assertions.LenientMatchAssertable";
     private static Map<String, Assertable> assertables = new ConcurrentHashMap<>();
 
     private final ParameterSupport parameterSupport;
+    private final AssertionHandler assertionHandler;
 
-    private Asserters(ParameterSupport parameterSupport) {
+    private Asserters(ParameterSupport parameterSupport, AssertionHandler assertionHandler) {
         this.parameterSupport = parameterSupport;
+        this.assertionHandler = assertionHandler;
     }
 
-    public static Asserters getInstance(ParameterSupport parameterSupport) {
-        return new Asserters(parameterSupport);
+    public static Asserters getInstance(ParameterSupport parameterSupport, AssertionHandler assertionHandler) {
+        return new Asserters(parameterSupport, assertionHandler);
     }
 
     public void doAssert(TestAsserter asserter, Response response) {
@@ -44,8 +46,9 @@ public class Asserters {
         }
         try {
             assertable.doAssert(this, asserter, response);
+            assertionHandler.success(asserter);
         } catch(Throwable t) {
-            logger.error("Assertion failed", t);
+            assertionHandler.fail(asserter, t);
         }
     }
 

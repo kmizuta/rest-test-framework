@@ -1,7 +1,7 @@
 {
   "testCases": [
     {
-      "name": "Test 1",
+      "name": "Test XX",
       "request": {
         "method": "GET",
         "urlPath": "Tourist"
@@ -22,7 +22,7 @@
       }
     },
     {
-      "name": "Test 2",
+      "name": "Test YY",
       "request": {
         "method": "GET",
         "urlPath": "Tourist/@{ id }"

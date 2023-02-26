@@ -1,4 +1,4 @@
-package oracle.spectra.tester.runner;
+package oracle.spectra.tester;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
@@ -55,6 +55,9 @@ public class ParameterSupport {
     }
 
     private String convertParameterToString(Object propValue) {
+        if (propValue == null)
+            return null;
+
         if (propValue instanceof Map || propValue instanceof List) {
             throw new NotImplementedException("Property class not implemented yet - " + propValue.getClass().getName());
         }
