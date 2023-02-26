@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class JunitAssertionHandler implements AssertionHandler {
     private static final Logger logger = LoggerFactory.getLogger(JunitAssertionHandler.class);

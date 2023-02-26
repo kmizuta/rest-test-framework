@@ -1,8 +1,8 @@
 package oracle.spectra.tester;
 
 
-import oracle.spectra.tester.model.TestAsserter;
 import oracle.spectra.tester.assertions.AssertionHandler;
+import oracle.spectra.tester.model.TestAsserter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

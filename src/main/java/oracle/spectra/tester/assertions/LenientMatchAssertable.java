@@ -1,8 +1,8 @@
 package oracle.spectra.tester.assertions;
 
 import io.restassured.response.Response;
-import oracle.spectra.tester.model.TestAsserter;
 import oracle.spectra.tester.JsonUtil;
+import oracle.spectra.tester.model.TestAsserter;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;

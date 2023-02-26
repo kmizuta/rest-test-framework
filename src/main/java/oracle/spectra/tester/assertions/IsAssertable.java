@@ -2,8 +2,8 @@ package oracle.spectra.tester.assertions;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.restassured.response.Response;
-import oracle.spectra.tester.model.TestAsserter;
 import oracle.spectra.tester.JsonUtil;
+import oracle.spectra.tester.model.TestAsserter;
 import org.hamcrest.Matchers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
