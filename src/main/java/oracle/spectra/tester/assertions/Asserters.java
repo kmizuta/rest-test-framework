@@ -15,7 +15,7 @@ public class Asserters {
     private static final String HTTP_STATUS_ASSERTABLE_CLASS = "oracle.spectra.tester.assertions.HttpStatusAssertable";
     private static final String IS_ASSERTABLE_CLASS = "oracle.spectra.tester.assertions.IsAssertable";
     private static final String LENIENT_MATCH_ASSERTABLE_CLASS = "oracle.spectra.tester.assertions.LenientMatchAssertable";
-    private static Map<String, Assertable> assertables = new ConcurrentHashMap<>();
+    private static final Map<String, Assertable> assertables = new ConcurrentHashMap<>();
 
     private final ParameterSupport parameterSupport;
     private final AssertionHandler assertionHandler;

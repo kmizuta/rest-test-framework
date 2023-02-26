@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class JsonUtil {
 
-    private static ObjectMapper objectMapper;
+    private static final ObjectMapper objectMapper;
     static {
         objectMapper = new ObjectMapper();
     }

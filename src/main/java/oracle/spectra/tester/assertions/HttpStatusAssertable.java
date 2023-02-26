@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class HttpStatusAssertable implements Assertable {
-    private static Logger logger = LoggerFactory.getLogger(HttpStatusAssertable.class);
+    private static final Logger logger = LoggerFactory.getLogger(HttpStatusAssertable.class);
 
     @Override
     public void doAssert(Asserters asserters, TestAsserter asserter, Response response) {

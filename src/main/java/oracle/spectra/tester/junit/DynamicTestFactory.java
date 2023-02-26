@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DynamicTestFactory {
-    private static Logger logger = LoggerFactory.getLogger(DynamicTestFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(DynamicTestFactory.class);
 
     public static List<DynamicTest> getTestCases(TestRunnerFactory factory, InputStream... jsonInputStreams) throws IOException {
         var objectMapper = JsonUtil.getObjectMapper();

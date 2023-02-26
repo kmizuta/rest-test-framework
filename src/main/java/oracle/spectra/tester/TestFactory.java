@@ -9,7 +9,7 @@ import java.io.InputStream;
 
 public class TestFactory {
 
-    private static Logger logger = LoggerFactory.getLogger(TestFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(TestFactory.class);
 
     public static TestCases getInstance(InputStream jsonInputStream) throws IOException {
         var objectMapper = JsonUtil.getObjectMapper();

@@ -101,10 +101,9 @@ public class TestRunner {
     }
 
     private Matcher getMatcher(JsonNode matcherNode) {
-        if (! (matcherNode instanceof ObjectNode))
+        if (! (matcherNode instanceof ObjectNode matcherObject))
             throw new RuntimeException("Invalid \"matcher\" node");
 
-        var matcherObject = (ObjectNode) matcherNode;
         var isNode = matcherObject.get("is");
         if (isNode != null) {
             logger.info(isNode.getNodeType().toString());

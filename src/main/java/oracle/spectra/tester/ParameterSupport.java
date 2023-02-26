@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class ParameterSupport {
-    private static Logger logger = LoggerFactory.getLogger(ParameterSupport.class);
+    private static final Logger logger = LoggerFactory.getLogger(ParameterSupport.class);
     private final Map<String, Object> parameters;
 
     ParameterSupport() {

@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 public class Main {
-    private static Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException {
         var main = new Main();
@@ -22,7 +22,7 @@ public class Main {
         var factory = TestRunnerFactory.getInstance("http://restapi.adequateshop.com/api", new SampleAssertionHandler());
         var testCases = TestFactory.getInstance(Main.class.getClassLoader().getResourceAsStream("testCase1.json"));
 
-        System.out.println(String.format("# of test cases = %d", testCases.getTestCases().size()));
+        System.out.printf("# of test cases = %d%n", testCases.getTestCases().size());
         var runner = factory.createRunner();
         testCases.getTestCases().forEach( testCase -> runner.runTest(testCase));
 

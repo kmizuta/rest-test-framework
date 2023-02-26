@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class IsAssertable implements Assertable {
-    private static Logger logger = LoggerFactory.getLogger(IsAssertable.class);
+    private static final Logger logger = LoggerFactory.getLogger(IsAssertable.class);
 
     @Override
     public void doAssert(Asserters asserters, TestAsserter asserter, Response response) {
