@@ -4,21 +4,19 @@ import oracle.spectra.tester.assertions.AssertionHandler;
 
 public class TestRunnerFactory {
 
-    public static TestRunnerFactory getInstance(String baseUrl, AssertionHandler assertionHandler) {
-        return new TestRunnerFactory(baseUrl, assertionHandler);
+    public static TestRunnerFactory getInstance(TestEnvironmentConfiguration config) {
+        return new TestRunnerFactory(config);
     }
 
-    private final String baseUrl;
-    private final AssertionHandler assertionHandler;
+    private final TestEnvironmentConfiguration config;
 
 
-    private TestRunnerFactory(String baseUrl, AssertionHandler assertionHandler) {
-        this.baseUrl = baseUrl;
-        this.assertionHandler = assertionHandler;
+    private TestRunnerFactory(TestEnvironmentConfiguration config) {
+        this.config = config;
     }
 
     public TestRunner createRunner() {
-        return new TestRunner(baseUrl, assertionHandler);
+        return new TestRunner(config);
     }
 
 }

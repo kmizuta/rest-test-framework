@@ -14,7 +14,14 @@ public class SampleTestCase {
 
     @BeforeAll
     public static void setupTestRunnerFactory() {
-        factory = TestRunnerFactory.getInstance("http://restapi.adequateshop.com/api", new JunitAssertionHandler());
+        var config = TestEnvironmentConfiguration.builder()
+                .baseUrl("http://restapi.adequateshop.com/api")
+                .assertionHandler(new JunitAssertionHandler())
+                .proxyScheme("http")
+                .proxyHost("www-proxy-hqdc.us.oracle.com")
+                .proxyPort(80)
+                .build();
+        factory = TestRunnerFactory.getInstance(config);
     }
 
     @TestFactory

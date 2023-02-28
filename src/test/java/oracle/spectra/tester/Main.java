@@ -19,7 +19,14 @@ public class Main {
     public void run() throws IOException {
 
         //http://restapi.adequateshop.com/api/Tourist
-        var factory = TestRunnerFactory.getInstance("http://restapi.adequateshop.com/api", new SampleAssertionHandler());
+        var config = TestEnvironmentConfiguration.builder()
+                .baseUrl("http://restapi.adequateshop.com/api")
+                .assertionHandler(new SampleAssertionHandler())
+                .proxyScheme("http")
+                .proxyHost("www-proxy-hqdc.us.oracle.com")
+                .proxyPort(80)
+                .build();
+        var factory = TestRunnerFactory.getInstance(config);
         var testCases = TestFactory.getInstance(Main.class.getClassLoader().getResourceAsStream("testCase1.json"));
 
         System.out.printf("# of test cases = %d%n", testCases.getTestCases().size());

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.AuthenticationSpecification;
+import io.restassured.specification.ProxySpecification;
 import io.restassured.specification.RequestSpecification;
 import oracle.spectra.tester.assertions.Asserters;
 import oracle.spectra.tester.assertions.AssertionHandler;
@@ -24,14 +25,14 @@ import java.net.URL;
 public class TestRunner {
     private static final Logger logger = LoggerFactory.getLogger(TestRunner.class);
 
-    private final String baseUrl;
+    private final TestEnvironmentConfiguration config;
     private final ParameterSupport parameterSupport;
     private final Asserters asserters;
 
-    TestRunner(String baseUrl, AssertionHandler assertionHandler) {
-        this.baseUrl = baseUrl;
+    TestRunner(TestEnvironmentConfiguration config) {
+        this.config = config;
         this.parameterSupport = new ParameterSupport();
-        this.asserters = Asserters.getInstance(parameterSupport, assertionHandler);
+        this.asserters = Asserters.getInstance(parameterSupport, config.getAssertionHandler());
     }
 
     public void runTest(TestCase testCase) {
@@ -43,6 +44,10 @@ public class TestRunner {
 
         if (logger.isDebugEnabled()) {
             logger.debug(url.toString());
+        }
+        if (config.getProxyHost() != null && config.getProxyScheme() != null) {
+            var proxySpecification = new ProxySpecification(config.getProxyHost(), config.getProxyPort(), config.getProxyScheme());
+            requestSpecification.proxy(proxySpecification);
         }
         var response =
             switch(method) {
@@ -62,7 +67,7 @@ public class TestRunner {
     private URL getUrl(TestRequest request) {
         var builder = new StringBuilder();
         var urlPath = parameterSupport.replaceParameters(request.getUrlPath());
-        var url = builder.append(baseUrl).append("/").append(urlPath).toString();
+        var url = builder.append(config.getBaseUrl()).append("/").append(urlPath).toString();
         logger.info(url);
         try {
             return new URL(url);

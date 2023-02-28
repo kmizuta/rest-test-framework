@@ -30,7 +30,7 @@
       "response": {
         "assertions": [
           { "type": "isString", "arg":  { "path":  "tourist_email", "value":  "@{ tourist_email }" } },
-          { "type":  "oracle.spectra.tester.SampleAsserter" }
+          { "type":  "oracle.spectra.tester.SampleAsserter" },
         ]
       }
     }
