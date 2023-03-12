@@ -21,6 +21,7 @@
         <version.lib.slf4j>2.0.6</version.lib.slf4j>
         <version.lib.junit-jupiter>5.9.2</version.lib.junit-jupiter>
         <version.plugin.maven-compiler>3.10.1</version.plugin.maven-compiler>
+        <version.lib.nashorn>15.4</version.lib.nashorn>
     </properties>
 
     <dependencies>
@@ -73,6 +74,13 @@
             <version>${version.lib.slf4j}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.openjdk.nashorn</groupId>
+            <artifactId>nashorn-core</artifactId>
+            <version>${version.lib.nashorn}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
